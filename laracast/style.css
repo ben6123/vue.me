@@ -1,0 +1,17 @@
+/* 
+Attribute binding and event handling
+
+html,
+body{
+  height: 100%;
+}
+body{
+  display: grid;
+  place-items: center;
+}
+.text-red {
+  color: red;
+}
+.text-green {
+  color: green;
+} */
