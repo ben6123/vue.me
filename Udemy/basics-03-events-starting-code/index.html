@@ -20,12 +20,17 @@
       <h2>Events in Action</h2>
       <button @click="add(5)">Add</button>
       <button @click="deduct(4)">deduct</button>
+      <p v-once>starter: {{ counter }}</p>
       <p>Result: {{ counter }}</p>
-      <input type="text" @input="setName($event,'pablo')" @keyup.enter="confirmInput()">
+      <input
+        type="text"
+        @input="setName($event,'pablo')"
+        @keyup.enter="confirmInput()"
+      />
       <!--the $event is a keyword to pass in and event object-->
       <p>Your Name:{{confirmedName}}</p>
       <form v-on:submit.prevent="submitForm">
-        <input type="text">
+        <input type="text" />
         <button>Sign Up</button>
       </form>
     </section>
