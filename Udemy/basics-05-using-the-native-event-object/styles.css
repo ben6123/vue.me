@@ -52,6 +52,7 @@ header {
 #events input {
   font: inherit;
   border: 1px solid #ccc;
+  margin: 0 0.4rem;
 }
 
 #events input:focus {
