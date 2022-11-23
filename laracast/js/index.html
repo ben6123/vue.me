@@ -8,6 +8,30 @@
     <link rel="stylesheet" href="style.css" />
     <script src="https://unpkg.com/vue@3"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @keyframes spinner {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .is-loading{color:transparent;}
+
+      .is-loading:before {
+        content: "";
+        box-sizing: border-box;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        margin-top: -10px;
+        margin-left: -10px;
+        border-radius: 50%;
+        border-top: 2px solid #07d;
+        border-right: 2px solid transparent;
+        animation: spinner 0.6s linear infinite;
+      }
+    </style>
   </head>
   <body class="h-full grid place-items-center">
     <!--
@@ -59,34 +83,18 @@
       }).mount("#app");
     </script>
   -->
-    <!--
 
-  <div id="app">
-    <app-button>Submit</app-button>
+    <div id="app">
+      <app-button>Submit</app-button>
     </div>
 
-    <script>
-      let app = {
-        components: {
-          'app-button': {
-            template:`
-            <button class="bg-gray-200 hover:bg-red-400 border rounded px-5 py-2 disabled:cursor-not-allowed"  :disabled="processing" ><slot></button>
-            `,
+    <script type="module">
+      import App from "./components/app.js";
 
-            data(){
-              return{
-                processing:true,
-              };
-            },
-          },
-        },
-      };
-      
-      Vue.createApp(app).mount("#app");
+      Vue.createApp(App).mount("#app");
       // or
       // let app1=Vue.createApp({});
       // app1.mount()
-      </script>
-      -->
+    </script>
   </body>
 </html>
