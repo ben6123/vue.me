@@ -2,12 +2,7 @@
   <section>
     <h2>{{ teamName }}</h2>
     <ul>
-      <user-item
-        v-for="member in members"
-        :key="member.id"
-        :name="member.fullName"
-        :role="member.role"
-      ></user-item>
+      <user-item v-for="member in members" :key="member.id" :name="member.fullName" :role="member.role"></user-item>
     </ul>
     <router-link to="/teams/t2">Go to team 2</router-link>
   </section>
@@ -18,38 +13,45 @@ import UserItem from '../users/UserItem.vue';
 
 export default {
   inject: ['users', 'teams'],
-  props:['teamId'],
+  props: ['teamId'],
   components: {
     UserItem,
   },
   data() {
     return {
       teamName: '',
-      members:[],
+      members: [],
     };
   },
   methods: {
     loadTeamMeambers(teamId) {
-       // console.log(this.$route.path)
-    // const teamId = route.params.teamId;
-    const selectedTeam = this.teams.find((team) => team.id === teamId);
-    const members = selectedTeam.members;
-    const selectedMembers = [];
-    for (const member of members) {
-      const selectedUser=this.users.find(user=>user.id===member)
-      selectedMembers.push(selectedUser)
+      // console.log(this.$route.path)
+      //  console.log(this.$route.query)
+      // const teamId = route.params.teamId;
+      const selectedTeam = this.teams.find((team) => team.id === teamId);
+      const members = selectedTeam.members;
+      const selectedMembers = [];
+      for (const member of members) {
+        const selectedUser = this.users.find(user => user.id === member)
+        selectedMembers.push(selectedUser)
+      }
+      this.members = selectedMembers;
+      this.teamName = selectedTeam.name
     }
-    this.members = selectedMembers;
-    this.teamName=selectedTeam.name
-  }
-},
-created() {
-  this.loadTeamMeambers(this.teamId);
-},
-watch: {
+  },
+  created() {
+    this.loadTeamMeambers(this.teamId);
+  },
+  beforeRouteUpdate(to, from, next) {
+    console.log('hey')
+    console.log(to,from)
+    // this.loadTeamMeambers(to.params.teamId)the teamId below does this already
+    next()
+  },
+  watch: {
     teamId(newId) {
-    this.loadTeamMeambers(newId);
-  }
+      this.loadTeamMeambers(newId);
+    }
   }
 };
 </script>

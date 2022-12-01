@@ -12,11 +12,11 @@ export default {
   computed: {
     teamlink() {
       // return '/teams/'+this.id
-      return { name: 'teams-members', params: { teamId: this.id } }
+      return { name: 'teams-members', params: { teamId: this.id }, query: { sort: 'asc' } }
       // this.$router.push({ name: 'teams-members', params: { teamId: this.id } })
     },
   }
-};
+}
 </script>
 
 <style scoped>
