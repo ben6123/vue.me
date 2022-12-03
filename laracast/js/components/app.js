@@ -1,7 +1,11 @@
- import AppButton from "./appButton.js";
+ import Assignments from "./Assignments.js";
 
 export default {
   components: {
-    "app-button": AppButton,
+    Assignments
   },
+  template: `
+  <Assignments></Assignments>
+  `,
+  
 };
