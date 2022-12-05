@@ -7,13 +7,13 @@ export default {
       qty: 0,
     };
   },
-  mutation: {
+  mutations: {
     addProductToCart(state, payload) {
+      // console.log(payload)
       const productData = payload;
       const productInCartIndex = state.items.findIndex(
         (ci) => ci.productId === productData.id
       );
-
       if (productInCartIndex >= 0) {
         state.items[productInCartIndex].qty++;
       } else {
@@ -43,22 +43,25 @@ export default {
   },
   actions: {
     addToCart(context, payload) {
-      // console.log(this.addProductToCart)
-      context.commit('addProductToCard', payload);
+      // console.log(context)
+      const prodId = payload.id;
+      const products = context.rootGetters['prods/products'];
+      const product=products.find(prod=>prod.id===prodId)
+      context.commit('addProductToCart', product);
     },
     removeFromCart(context, payload) {
-      context.commit('removeProductFromCart',payload)
+      context.commit('removeProductFromCart', payload);
     },
   },
   getters: {
-    items(state) {
-      return state.items
+    products(state) {
+      return state.items;
     },
     totalSum(state) {
-      return state.total
+      return state.total;
     },
-    Qty(state) {
-      return state.qty
-    }
-  }
+    quantity(state) {
+      return state.qty;
+    },
+  },
 };

@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="product__actions">
-      <button @click="addToCart">Add to Cart</button>
+      <button @click="addToCart()">Add to Cart</button>
     </div>
   </li>
 </template>
@@ -23,12 +23,8 @@ export default {
   props: ['id', 'image', 'title', 'price', 'description'],
   methods: {
     addToCart() {
-      this.$store.dispatch('cart/addToCart', {
-        id: this.id,
-        image: this.image,
-        title: this.title,
-        price: this.price,
-      })
+      // console.log('addacalled')
+      this.$store.dispatch('cart/addToCart', {id: this.id})
     },
   },
 };
