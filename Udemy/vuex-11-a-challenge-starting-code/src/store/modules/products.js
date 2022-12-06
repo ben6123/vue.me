@@ -1,5 +1,5 @@
 export default {
-  namespaced:true,
+  namespaced: true,
   state() {
     return {
       products: [
@@ -15,7 +15,9 @@ export default {
         {
           id: 'p2',
           image:
-            'https://upload.wikimedia.org/wikipedia/en/thumb/c/c9/Tent_at_High_Shelf_Camp_cropped.jpg/640px-Tent_at_High_Shelf_Camp_cropped.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Camping_Tent_at_Doi_Angkhang_Mountain%2C_Chiangmai%2C_Thailand.jpg/1200px-Camping_Tent_at_Doi_Angkhang_Mountain%2C_Chiangmai%2C_Thailand.jpg?20150617144732',
+
+          // 'https://upload.wikimedia.org/wikipedia/en/thumb/c/c9/Tent_at_High_Shelf_Camp_cropped.jpg/640px-Tent_at_High_Shelf_Camp_cropped.jpg'
           title: 'Mountain Tent',
           description: 'A tent for the ambitious outdoor tourist.',
           price: 129.99,
@@ -35,7 +37,7 @@ export default {
   //getters help us access global value of state,it is adviceable to access thru getters instead of accessing valus in a state
   getters: {
     products(state) {
-      return state.products
-    }
-  }
-}
+      return state.products;
+    },
+  },
+};
