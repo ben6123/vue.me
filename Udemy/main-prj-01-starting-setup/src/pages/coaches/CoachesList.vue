@@ -1,26 +1,21 @@
 <template>
-  
+
   <section>
     <coach-filter @change-filter="setFilters"></coach-filter>
   </section>
   <section>
     <base-card>
-    <div class="controls">
-      <base-button mode="outline">Refresh</base-button>
-      <base-button link to="/register">Register as Coach</base-button>
-    </div>
-    <ul v-if="hasCoaches">
-      <coach-item v-for="coach in filteredCoaches"
-       :key="coach.id" 
-       :id="coach.id" 
-       :rate="coach.hourlyRate"
-       :first-name="coach.firstName" 
-       :areas="coach.areas" 
-       :last-name="coach.lastName">
-      </coach-item>
-    </ul>
-    <h3 v-else>NO COACHES FOUND</h3>
-  </base-card>
+      <div class="controls">
+        <base-button mode="outline">Refresh</base-button>
+        <base-button v-if="!isCoach" link to="/register">Register as Coach</base-button>
+      </div>
+      <ul v-if="hasCoaches">
+        <coach-item v-for="coach in filteredCoaches" :key="coach.id" :id="coach.id" :rate="coach.hourlyRate"
+          :first-name="coach.firstName" :areas="coach.areas" :last-name="coach.lastName">
+        </coach-item>
+      </ul>
+      <h3 v-else>NO COACHES FOUND</h3>
+    </base-card>
   </section>
 </template>
 
@@ -42,6 +37,10 @@ export default {
     }
   },
   computed: {
+    isCoach() {
+      return this.$store.getters['coaches/isCoach']
+    }
+    ,
     filteredCoaches() {
       const coaches = this.$store.getters['coaches/coaches'];
       // console.log(coaches)
@@ -64,7 +63,7 @@ export default {
   },
   methods: {
     setFilters(updatedFilters) {
-      this.activeFilters=updatedFilters
+      this.activeFilters = updatedFilters
     }
   }
 }
