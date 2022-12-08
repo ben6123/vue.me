@@ -6,6 +6,7 @@ export default {
   namespaced:true,
   state() {
     return {
+      // userIsCoach:false,,,when a user signs up we caon set this to true
       coaches: [
         {
           id: 'c1',
