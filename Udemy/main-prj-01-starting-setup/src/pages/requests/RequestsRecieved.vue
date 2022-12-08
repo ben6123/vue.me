@@ -1,3 +1,4 @@
 <template>
-  <div></div>
+  <div>REQUEST</div>
 </template>
+<script></script>
