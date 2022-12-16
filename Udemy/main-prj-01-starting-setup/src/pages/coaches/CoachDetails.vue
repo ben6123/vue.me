@@ -37,7 +37,7 @@ export default {
       return this.selectedCoach.firstName + ' ' + this.selectedCoach.lastName
     },
     contactLink() {
-      console.log(this.$route.path)
+      // console.log(this.$route.path)
       // return this.$route.path + '/' + this.id + 'contact'
 
       return this.$route.path +'/contact'
