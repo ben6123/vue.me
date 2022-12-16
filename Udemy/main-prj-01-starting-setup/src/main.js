@@ -19,5 +19,5 @@ app.component('base-card',BaseCard)
 app.component('base-button',BaseButton)
 app.component('base-badge',BaseBadge)
 app.component('base-spinner', BaseSpinner);
-app.component('base-Dialog', BaseDialog);
+app.component('base-dialog', BaseDialog);
 app.mount('#app');

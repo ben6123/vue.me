@@ -1,5 +1,8 @@
 <template>
-
+  <!-- !! converts error in a truthy value since it is a string -->
+  <base-dialog :show="!!error" title="An error occurred!" @close="handleError">
+<p>{{error}}</p>
+</base-dialog>
   <section>
     <coach-filter @change-filter="setFilters"></coach-filter>
   </section>
@@ -85,6 +88,9 @@ export default {
       }
       //dispatch calls action
        this.isLoading = false;
+    },
+    handleError() {
+      this.error = null
     }
   }
 }

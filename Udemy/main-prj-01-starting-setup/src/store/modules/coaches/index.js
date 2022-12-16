@@ -6,7 +6,8 @@ export default {
   namespaced:true,
   state() {
     return {
-      // userIsCoach:false,,,when a user signs up we caon set this to true
+      // userIsCoach:false,,,when a user signs up we can set this to true
+      lastFetch: null,
       coaches: [
         {
           id: 'c1',

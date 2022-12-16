@@ -32,7 +32,7 @@ export default {
       `https://coaches-27db7-default-rtdb.firebaseio.com/coaches/.json`
     );
     const responseData = await response.json();
-    console.log(responseData);   //an array of objects
+    // console.log(responseData);   //an array of objects
     
     if (!response.ok) {
       // console.log('not ok')
