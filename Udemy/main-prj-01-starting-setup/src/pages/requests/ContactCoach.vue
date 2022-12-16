@@ -6,8 +6,9 @@
     </div>
     <div class="form-control">
       <label for="message">Message</label>
-      <textarea  id="message" rows="5"></textarea>
+      <textarea id="message" rows="5" v-model.trim="message"></textarea>
     </div>
+    <p class="errors" v-if="!formIsValid">Please verify that your E-mail is valid and message field is not empty</p>
     <div class="actions">
       <base-button>send message</base-button>
     </div>
@@ -25,11 +26,14 @@ export default {
   methods: {
     submitForm() {
       this.formIsValid = true;
-      if (this.email === '' || !this.email.includes('@') || this.message === '') {
+      if (this.email === '' ||
+        !this.email.includes('@') ||
+        this.message === ''
+      ) {
         this.formIsValid = false;
         return;
       }
-      
+
     }
   }
 }
