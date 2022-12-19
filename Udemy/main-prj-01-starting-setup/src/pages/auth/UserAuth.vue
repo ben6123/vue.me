@@ -11,7 +11,7 @@
       </div>
       <p v-if="!formIsValid">Please enter a valid email and password(password must be at least 6 characters long)</p>
       <base-button>{{ sibmitButtonCaption }}</base-button>
-      <base-button type="button" mode="flat" @click="switchAuthMode" >{{ switchModeButtonCaption }}</base-button>
+      <base-button type="button" mode="flat" @click="switchAuthMode">{{ switchModeButtonCaption }}</base-button>
     </form>
   </base-card>
 </template>
