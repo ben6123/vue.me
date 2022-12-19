@@ -6,7 +6,7 @@
     <section>
       <base-card>
         <header>
-          <h2>Request Recieved</h2>
+          <h2>Requests</h2>
         </header>
         <base-spinner v-if="isLoading"></base-spinner>
         <ul v-else-if="hasRequests && !isLoading">
@@ -76,5 +76,8 @@ ul {
 
 h3 {
   text-align: center;
+}
+h2 {
+  text-decoration: underline;
 }
 </style>
