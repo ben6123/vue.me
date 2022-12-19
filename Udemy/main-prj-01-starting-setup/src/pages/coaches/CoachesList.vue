@@ -1,28 +1,30 @@
 <template>
-  <!-- !! converts error in a truthy value since it is a string -->
-  <base-dialog :show="!!error" title="An error occurred!" @close="handleError">
-<p>{{error}}</p>
-</base-dialog>
-  <section>
-    <coach-filter @change-filter="setFilters"></coach-filter>
-  </section>
-  <section>
-    <base-card>
-      <div class="controls">
-        <base-button mode="outline" @click="loadCoaches" >Refresh</base-button>
-        <base-button v-if="!isCoach && !isLoading" link to="/register">Register as Coach</base-button>
-      </div>
-      <div v-if="isLoading">
-      <base-spinner></base-spinner>
-      </div>
-      <ul v-else-if="hasCoaches">
-        <coach-item v-for="coach in filteredCoaches" :key="coach.id" :id="coach.id" :rate="coach.hourlyRate"
-          :first-name="coach.firstName" :areas="coach.areas" :last-name="coach.lastName">
-        </coach-item>
-      </ul>
-      <h3 v-else>NO COACHES FOUND</h3>
-    </base-card>
-  </section>
+  <div>
+    <!-- !! converts error in a truthy value since it is a string -->
+    <base-dialog :show="!!error" title="An error occurred!" @close="handleError">
+      <p>{{ error }}</p>
+    </base-dialog>
+    <section>
+      <coach-filter @change-filter="setFilters"></coach-filter>
+    </section>
+    <section>
+      <base-card>
+        <div class="controls">
+          <base-button mode="outline" @click="loadCoaches(true)">Refresh</base-button>
+          <base-button v-if="!isCoach && !isLoading" link to="/register">Register as Coach</base-button>
+        </div>
+        <div v-if="isLoading">
+          <base-spinner></base-spinner>
+        </div>
+        <ul v-else-if="hasCoaches">
+          <coach-item v-for="coach in filteredCoaches" :key="coach.id" :id="coach.id" :rate="coach.hourlyRate"
+            :first-name="coach.firstName" :areas="coach.areas" :last-name="coach.lastName">
+          </coach-item>
+        </ul>
+        <h3 v-else>NO COACHES FOUND</h3>
+      </base-card>
+    </section>
+  </div>
 </template>
 
 <script>
@@ -37,7 +39,7 @@ export default {
   data() {
     return {
       isLoading: false,
-      error:null,
+      error: null,
       activeFilters: {
         frontend: true,
         backend: true,
@@ -70,7 +72,7 @@ export default {
       return !this.isLoading && this.$store.getters['coaches/hasCoaches']
     }
   },
-  
+
   created() {
     this.loadCoaches()
   },
@@ -78,16 +80,18 @@ export default {
     setFilters(updatedFilters) {
       this.activeFilters = updatedFilters
     },
-     async loadCoaches() {
-       this.isLoading = true
-       try {
-         await this.$store.dispatch('coaches/loadCoaches')
-        
-       } catch (error) {
-        this.error=error.message || 'Something Went Wrong'
+    async loadCoaches(refresh = false) {
+      this.isLoading = true
+      try {
+        await this.$store.dispatch('coaches/loadCoaches', {
+          forceRefresh: refresh
+        })
+
+      } catch (error) {
+        this.error = error.message || 'Something Went Wrong'
       }
       //dispatch calls action
-       this.isLoading = false;
+      this.isLoading = false;
     },
     handleError() {
       this.error = null

@@ -1,20 +1,22 @@
 <template>
-  <base-dialog :show="!!error" title="An error occurred!" @close="handleError">
-    <p>{{error}}</p>
-  </base-dialog>
-  <section>
-    <base-card>
-      <header>
-        <h2>Request Recieved</h2>
-      </header>
-      <base-spinner v-if="isLoading"></base-spinner>
-      <ul v-else-if="hasRequests && !isLoading">
-        <RequestItem v-for="req in recievedRequests" :key="req.id" :email="req.userEmail" :message="req.message">
-        </RequestItem>
-      </ul>
-      <h3 v-else>You have not Recieved any requests yet!</h3>
-    </base-card>
-  </section>
+  <div>
+    <base-dialog :show="!!error" title="An error occurred!" @close="handleError">
+      <p>{{ error }}</p>
+    </base-dialog>
+    <section>
+      <base-card>
+        <header>
+          <h2>Request Recieved</h2>
+        </header>
+        <base-spinner v-if="isLoading"></base-spinner>
+        <ul v-else-if="hasRequests && !isLoading">
+          <RequestItem v-for="req in recievedRequests" :key="req.id" :email="req.userEmail" :message="req.message">
+          </RequestItem>
+        </ul>
+        <h3 v-else>You have not Recieved any requests yet!</h3>
+      </base-card>
+    </section>
+  </div>
 </template>
 <script>
 import RequestItem from '../../components/requests/RequestItem.vue';
@@ -25,7 +27,7 @@ export default {
   data() {
     return {
       isLoading: false,
-      error:null,
+      error: null,
     }
   },
   created() {
@@ -41,7 +43,7 @@ export default {
   },
   methods: {
     async loadRequest() {
-      this.isLoading=true
+      this.isLoading = true
       // since fetchRequest action is made with async,it returns a promise,
       // so we use the await bellow to wait for that promise
       try {
@@ -54,7 +56,7 @@ export default {
       this.isLoading = false
     },
     handleError() {
-      this.error=null
+      this.error = null
     }
   }
 }
