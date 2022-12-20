@@ -10,7 +10,6 @@ export default {
   props: ['email', 'message'],
   computed: {
     emailLink() {
-      // console.log('mailto:'+this.email)
       return 'mailto : '+this.email
     }
   }
