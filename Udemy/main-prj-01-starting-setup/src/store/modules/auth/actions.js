@@ -3,7 +3,8 @@ login(){},
   async signup(context, payload) {
   console.log('hey')
   const response = await fetch(
-    'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAxa759z6AlLK2w3ybyrjZxjsyi4aNN0fI',
+//     AIzaSyAxa759z6AlLK2w3ybyrjZxjsyi4aNN0fI  [ Api key]
+    'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[Api-key]',
     {
       method: 'POST',
       body: JSON.stringify({
