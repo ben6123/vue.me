@@ -1,5 +1,5 @@
 export default {
-login(){},
+async login(){},
   async signup(context, payload) {
   console.log('hey')
   const response = await fetch(
@@ -13,13 +13,17 @@ login(){},
       }),
     }
   );
-  // console.log(response)
+  console.log(response)
   
-  const responseData=await response.json()
-
-  if (!response.ok) {
+    const responseData = await response.json()
+  
+    if (!response.ok) {
     console.log(responseData)
-    const error=new Error(responseData.message || 'Failed to authenticate.')
+    const error = new Error(responseData.error.message);
+
+    // what i was given
+    // console.log(responseData)
+    // const error = new Error(responseData.message || 'Failed to authenticate.check your login data')
     throw error;
   }
 
