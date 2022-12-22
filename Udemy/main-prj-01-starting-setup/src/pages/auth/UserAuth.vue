@@ -15,7 +15,7 @@
           <input type="password" id="password" v-model.trim="password">
         </div>
         <p v-if="!formIsValid">Please enter a valid email and password(password must be at least 6 characters long)</p>
-        <base-button>{{ sibmitButtonCaption }}</base-button>
+        <base-button>{{ submitButtonCaption }}</base-button>
         <base-button type="button" mode="flat" @click="switchAuthMode">{{ switchModeButtonCaption }}</base-button>
       </form>
     </base-card>
@@ -35,7 +35,7 @@ export default {
     }
   },
   computed: {
-    sibmitButtonCaption() {
+    submitButtonCaption() {
       if (this.mode === 'login') {
         return 'login';
       } else {
@@ -73,11 +73,8 @@ export default {
           await this.$store.dispatch('signup', actionPayload)
         }
 
-        const redirectUrl = '/'+(this.$route.query.redirect || 'coaches')
-        
-        // any of the two bellow are acceptable
-        // this.$router.push({ path: '/coaches', replace: true })
-        this.$router.replace(redirectUrl)
+        const redirectUrl = '/' + (this.$route.query.redirect || 'coaches');
+        this.$router.replace(redirectUrl);
       } catch (err) {
         console.log(err)
         // this.error = err.message || 'Failed to Authenticate,try again later'

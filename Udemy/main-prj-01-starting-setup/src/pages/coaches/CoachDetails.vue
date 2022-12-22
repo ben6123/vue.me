@@ -38,12 +38,15 @@ export default {
       // console.log(this.selectedCoach)
       return this.selectedCoach.firstName + ' ' + this.selectedCoach.lastName
     },
+    // contactLink() {
+    //   // console.log(this.$route.path)
+    //   // return this.$route.path + '/' + this.id + 'contact'
+
+    
+    // },
     contactLink() {
-      // console.log(this.$route.path)
-      // return this.$route.path + '/' + this.id + 'contact'
-
-      return this.$route.path + '/contact'
-
+        return this.$route.path + '/contact'
+      // return this.$route.path + '/' + this.id + '/contact';
     },
     areas() {
       return this.selectedCoach.areas
@@ -56,7 +59,6 @@ export default {
     }
   },
   created() {
-    // console.log(this.$store.getters['coaches/coaches'])
     this.selectedCoach = this.$store.getters['coaches/coaches'].find(coach => coach.id === this.id)
   },
 }
