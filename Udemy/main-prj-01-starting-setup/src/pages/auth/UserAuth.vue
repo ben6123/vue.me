@@ -72,6 +72,12 @@ export default {
         } else {
           await this.$store.dispatch('signup', actionPayload)
         }
+
+        const redirectUrl = '/'+(this.$route.query.redirect || 'coaches')
+        
+        // any of the two bellow are acceptable
+        // this.$router.push({ path: '/coaches', replace: true })
+        this.$router.replace(redirectUrl)
       } catch (err) {
         console.log(err)
         // this.error = err.message || 'Failed to Authenticate,try again later'

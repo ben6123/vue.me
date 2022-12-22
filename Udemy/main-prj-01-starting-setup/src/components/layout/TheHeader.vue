@@ -23,7 +23,10 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.dispatch('logout')
+      this.$store.dispatch('logout');
+      // prompt('are you sure')
+      // alert('are you sure')
+      this.$router.replace('/coaches')
     }
   }
 }

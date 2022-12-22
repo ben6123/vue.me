@@ -7,6 +7,7 @@ import ContactCoach from './pages/requests/ContactCoach.vue'
 import NotFound from './pages/NotFound.vue';
 import RequestsRecieved from './pages/requests/RequestsRecieved.vue';
 import UserAuth from './pages/auth/UserAuth.vue';
+import store from './store/index'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -26,11 +27,23 @@ const router = createRouter({
       ],
     },
     { path: '/coaches', component: CoachesList, name: 'coaches' },
-    { path: '/register', component: CoachRegistration, name: 'register' },
-    { path: '/requests', component: RequestsRecieved, name: 'requests' },
-    { path: '/auth', component: UserAuth, name: 'auth' },
+    { path: '/register', component: CoachRegistration, name: 'register' ,meta:{requiresAuth:true}},
+    { path: '/requests', component: RequestsRecieved, name: 'requests', meta: { requiresAuth: true } },
+    { path: '/auth', component: UserAuth, name: 'auth', meta: { requiresUnauth: true } },
     { path: '/:notFound(.*)', component: NotFound, name: 'notFound' },
   ],
 });
 
+
+router.beforeEach(function (to, _, next) {
+  if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
+    // sends the user to the auth page if he is not registered and he tries to access routes with meta=requireAuth(register)
+    next('/auth');
+  } else if (to.meta.requiresUnauth && store.getters.isAuthenticated) {
+    // we can go to auth page only if we are not logged in,if we are logged in take us to coaches
+    next('/coaches');
+  } else {
+    next();
+  }
+});
 export default router;
