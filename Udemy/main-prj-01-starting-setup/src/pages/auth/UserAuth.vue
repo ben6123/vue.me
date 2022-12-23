@@ -76,7 +76,7 @@ export default {
         const redirectUrl = '/' + (this.$route.query.redirect || 'coaches');
         this.$router.replace(redirectUrl);
       } catch (err) {
-        console.log(err)
+        // console.log(err)
         // this.error = err.message || 'Failed to Authenticate,try again later'
         this.error = err || 'Failed to Authenticate,try again later'
       }

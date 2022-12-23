@@ -28,6 +28,7 @@ export default {
       // console.log(this.id)
       // return '/coaches/' + this.id
       return this.$route.path +'/'+ this.id
+      // return this.$route.path + this.id
     }
 
 
