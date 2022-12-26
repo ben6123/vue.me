@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { ref,computed} from "vue";
+import { ref,computed,watch} from "vue";
 export default {
   setup() {
     // console.log(ref())
@@ -27,12 +27,21 @@ export default {
     //   age: 50
     // })
 
-    function setNewAge() {
-      uAge.value=33
-    }
+    // computed
     const uName = computed(function () {
       return firstName.value+' '+lastName.value
     })
+    // watchers
+    watch([uAge,uName], (newValues, oldValues) => {
+      console.log('old age: '+oldValues[0])
+      console.log('new age: '+newValues[0])
+      console.log('old name: '+oldValues[1])
+      console.log('new name: '+newValues[1])
+    })
+    // method
+    function setNewAge() {
+      uAge.value=33
+    }
 
 
     return {userName:uName,age: uAge, setNewAge, firstName, lastName }
@@ -49,8 +58,13 @@ export default {
   //   }
   // }
 
+  // watch: {
+  //   age(val) {
+  //     console.log(val)
+  //   console.log()
+  // }
+}
 
-};
 </script>
 
 <!-- <script setup>
