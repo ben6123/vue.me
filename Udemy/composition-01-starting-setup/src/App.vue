@@ -1,27 +1,32 @@
 <template>
   <section class="container">
-    <h2>{{ userName }}</h2>
-    <h3>{{ age }}</h3>
+    <!-- <h2>{{ userName }}</h2>
+    <h3>{{ age }}</h3> -->
+    <User-data :first-name="firstName" :last-name="lastName"></User-data>
     <!-- <h2>{{ uName }}</h2> -->
-    <button @click="setNewAge">Change Age</button>
+    <button @click="setAge">Change Age</button>
     <div>
-<input type="text" placeholder="First Name" v-model='firstName'>
-<input type="text" placeholder="last Name" ref="lastNameInput">
-<button @click="setLastName">Set Name</button>
+      <input type="text" placeholder="First Name" v-model='firstName'>
+      <input type="text" placeholder="last Name" ref="lastNameInput">
+      <button @click="setLastName">Set Last Name</button>
     </div>
   </section>
 </template>
 
 <script>
-import { ref,computed,watch} from "vue";
+import { ref, computed, watch, provide } from "vue";
+import UserData from "./component/UserData.vue";
 export default {
+  components: {
+    UserData
+  },
   setup() {
     // console.log(ref())
 
     // const uName = ref('Maximilian');
-    const firstName=ref('')
+    const firstName = ref('')
     const lastName = ref('')
-    const lastNameInput=ref(null)
+    const lastNameInput = ref(null)
     const uAge = ref(50)
     // console.log(uAge)
     // const user = reactive({
@@ -29,26 +34,30 @@ export default {
     //   age: 50
     // })
 
+    // provide
+    provide('userAge',uAge)
+
     // computed
     const uName = computed(function () {
-      return firstName.value+' '+lastName.value
+      return firstName.value + ' ' + lastName.value
     })
     // watchers
-    watch([uAge,uName], (newValues, oldValues) => {
-      console.log('old age: '+oldValues[0])
-      console.log('new age: '+newValues[0])
-      console.log('old name: '+oldValues[1])
-      console.log('new name: '+newValues[1])
+    watch([uAge, uName], function (newValues, oldValues) {
+      console.log('old age: ' + oldValues[0])
+      console.log('new age: ' + newValues[0])
+      console.log('old name: ' + oldValues[1])
+      console.log('new name: ' + newValues[1])
     })
     // method
     function setNewAge() {
-      uAge.value=33
+      uAge.value = 33
     }
-function setLastName() {
- return lastName.value=lastNameInput.value.value
-}
+    function setLastName() {
+      // console.log(lastNameInput.value.value)
+      return lastName.value = lastNameInput.value.value
+    }
 
-    return {userName:uName,age: uAge, setNewAge, firstName, lastNameInput,setLastName }
+    return { userName: uName, age: uAge, setAge: setNewAge, firstName, lastNameInput, setLastName, lastName }
   },
   // data() {
   //   return {
@@ -66,6 +75,10 @@ function setLastName() {
   //   age(val) {
   //     console.log(val)
   //   console.log()
+  // }
+
+  // provide() {
+  //   return {age:this.age};
   // }
 }
 
